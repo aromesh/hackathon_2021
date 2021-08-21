@@ -13,7 +13,8 @@ const map = new mapboxgl.Map({
 });
 map.dragRotate.disable();
 //  map stuff ends  //
-//dummy data
+
+//dummy data starts
 check = false;
 colors = ['#FF5733', '#FEFF33', '#63FF33', '#33FFDB', '#3343FF'];
 Vertex1 = [140, -20, 1];
@@ -27,7 +28,7 @@ Triangle1 = ['a1', Vertex4, Vertex2, Vertex3];
 Triangle2 = ['a2', Vertex4, Vertex2, Vertex5];
 Triangle3 = ['a3', Vertex4, Vertex3, Vertex6];
 ArrayOfTriangles = [Triangle0, Triangle1, Triangle2, Triangle3];
-
+// dummy data end
 
 //functions to edit whats on map
 function drawTriangles(ArrayOfTriangles) {
@@ -70,8 +71,6 @@ function drawTriangles(ArrayOfTriangles) {
     }
 }
 
-
-
 function eraseTriangles(ArrayOfTriangles) {
     for (let i = 0; i < ArrayOfTriangles.length; i++) {
         id = ArrayOfTriangles[i][0];
@@ -80,7 +79,7 @@ function eraseTriangles(ArrayOfTriangles) {
     }
 }
 
-
+//function to interact with webpage
 function saveID(a) {
     data = ["Temperature Map", "Rainfall Map", "Air Quality Map", "Vegetation Map"]
     document.getElementById('pasta').innerText = data[a];
@@ -99,3 +98,4 @@ function refresh() {
     }
     check = false
 }
+//end of code
