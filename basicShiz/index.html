@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Display a map on a webpage</title>
+  <title>Sus App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
@@ -34,9 +34,14 @@
         <!-- Add spacer -->
         <div class="mdl-layout-spacer"></div>
         <!-- Title -->
-        <span class="mdl-layout-title" id="pasta">Kinda Sus</span>
+        <span class="mdl-layout-title logo" id="pasta">Kinda Sus</span>
         <!-- Add spacer -->
         <div class="mdl-layout-spacer"></div>
+        <span class='refresh'>
+          <button onclick="refresh()" class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">refresh</i>
+          </button>
+        </span>
       </div>
     </header>
     <div class="mdl-layout__drawer">

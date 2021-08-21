@@ -23,6 +23,21 @@ a img{
   border: 0px;
 }
 
+.menu {
+  float: left;
+  margin: 10px;
+}
+
+.refresh {
+  float: right;
+
+}
+
+.logo {
+  text-align: center;
+  padding: 10px;
+}
+
 ::-moz-selection {
   background-color: #6ab344;
   color: #fff;

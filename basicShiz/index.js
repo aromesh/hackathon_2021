@@ -14,17 +14,18 @@ const map = new mapboxgl.Map({
 map.dragRotate.disable();
 //  map stuff ends  //
 //dummy data
-colors = ['#FF5733','#FEFF33','#63FF33','#33FFDB','#3343FF'];
-Vertex1 = [140, -20,1];
-Vertex2 = [136, -23,2];
-Vertex3 = [144, -23,3];
-Vertex4 = [140, -26,4];
-Vertex5 = [132, -26,5];
-Vertex6 = [148, -26,6];
-Triangle0 = ['a0',Vertex1, Vertex2, Vertex3];
-Triangle1 = ['a1',Vertex4, Vertex2, Vertex3];
-Triangle2 = ['a2',Vertex4, Vertex2, Vertex5];
-Triangle3 = ['a3',Vertex4, Vertex3, Vertex6];
+check = false;
+colors = ['#FF5733', '#FEFF33', '#63FF33', '#33FFDB', '#3343FF'];
+Vertex1 = [140, -20, 1];
+Vertex2 = [136, -23, 2];
+Vertex3 = [144, -23, 3];
+Vertex4 = [140, -26, 4];
+Vertex5 = [132, -26, 5];
+Vertex6 = [148, -26, 6];
+Triangle0 = ['a0', Vertex1, Vertex2, Vertex3];
+Triangle1 = ['a1', Vertex4, Vertex2, Vertex3];
+Triangle2 = ['a2', Vertex4, Vertex2, Vertex5];
+Triangle3 = ['a3', Vertex4, Vertex3, Vertex6];
 ArrayOfTriangles = [Triangle0, Triangle1, Triangle2, Triangle3];
 
 
@@ -47,9 +48,9 @@ function drawTriangles(ArrayOfTriangles) {
                     // These coordinates outline Maine.
                     'coordinates': [
                         [
-                            [v1[0],v1[1]],
-                            [v2[0],v2[1]],
-                            [v3[0],v3[1]],
+                            [v1[0], v1[1]],
+                            [v2[0], v2[1]],
+                            [v3[0], v3[1]],
                         ]
                     ]
                 }
@@ -80,7 +81,21 @@ function eraseTriangles(ArrayOfTriangles) {
 }
 
 
-  function saveID(a) {
-      data = ["Temperature Map", "Rainfall Map", "Air Quality Map","Vegetation Map"]
+function saveID(a) {
+    data = ["Temperature Map", "Rainfall Map", "Air Quality Map", "Vegetation Map"]
     document.getElementById('pasta').innerText = data[a];
+    if (check) {
+        eraseTriangles(ArrayOfTriangles)
+    }
+    drawTriangles(ArrayOfTriangles);
+    check = true
+
+}
+
+function refresh() {
+    if (check) {
+        eraseTriangles(ArrayOfTriangles)
+        document.getElementById('pasta').innerText = 'Kinda Sus Again';
+    }
+    check = false
 }
