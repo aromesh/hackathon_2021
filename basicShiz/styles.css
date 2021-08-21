@@ -540,3 +540,15 @@ a img{
     display: none;
   }
 }
+
+.mdl-layout__header-row {
+  background-color: #11324D;
+  text-align: center;
+  color: #E7E0C9;
+  font-size: 30px;
+  height: 60px;
+}
+
+.mdl-layout__header {
+  background-color: #11324D;
+}
