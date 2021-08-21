@@ -1,6 +1,4 @@
 import Delaunator from 'delaunator';
-import chroma from "chroma-js";
-import { colorbrewer } from "./colorbrewer";
 import seedrandom from "seedrandom";
 import { generate_grid } from "./points";
 
