@@ -38,8 +38,7 @@ function Triangulator(points) {
 
         triangle_pts.push(vertices);
     }
-
-
+    return triangle_pts;
 }
 
 var colors = ['#FF5733','#FEFF33','#63FF33','#33FFDB','#3343FF'];
