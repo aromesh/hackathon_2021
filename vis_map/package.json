@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "d3-geo-voronoi": "^1.6.0",
     "delaunator": "^5.0.0",
+    "fs": "0.0.1-security",
     "mapbox-gl": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -28,7 +31,6 @@
   },
   "author": "Mapbox",
   "license": "MIT",
-  
   "browserslist": {
     "production": [
       ">0.2%",
