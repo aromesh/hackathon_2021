@@ -66,8 +66,11 @@ function drawTriangles(map, points) {
         var min_value = points.reduce((x,y) => x<y[2] ? x : y[2]);
 
         //getColorValue(data, min_value, max_value);
+        let route = + new Date() + 1;
+        route = route.toString();
+        console.log(route);
         //  Add a new source
-        map.current.addSource(id, {
+        map.current.addSource(route, {
             'type': 'geojson',
             'data': {
                 'type': 'Feature',
@@ -86,9 +89,9 @@ function drawTriangles(map, points) {
         });
         // Add a new layer to visualize the polygon.
         map.current.addLayer({
-            'id': id,
+            'id': route,
             'type': 'fill',
-            'source': id, // reference the data source
+            'source': route, // reference the data source
             'layout': {},
             'paint': {
                 'fill-color': getColorValue(data, min_value, max_value), // blue color fill
@@ -100,8 +103,9 @@ function drawTriangles(map, points) {
 
 export function drawPoints(map, points)
 {
-    let route = + new Date();
+    let route = + new Date()+Math.random();
     route = route.toString();
+    console.log(route);
     map.current.addSource(route, {
         'type': 'geojson',
         'data': {

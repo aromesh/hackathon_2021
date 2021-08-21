@@ -100,16 +100,24 @@ function App({props}) {
 
       const MAX_POINTS = 300;
       var delta = Math.floor(req_points.length / MAX_POINTS);
+      let triangle_points;
+      if (req_points.length>MAX_POINTS){
       for (let i=0; i<req_points.length; i=i+delta)
       {
         filtered_array.push(req_points[i]);
       }
-      let triangle_points = req_points.map((elem) => [elem.lon,elem.lat, elem.temp]);
+      triangle_points = filtered_array.map((elem) => [elem.lon,elem.lat, elem.temp]);
+    }
+    else{
+      triangle_points = req_points.map((elem) => [elem.lon,elem.lat, elem.temp]);
+    }
 
       //draw points for vertices
       drawPoints(map, triangle_points);
       //draw triangles
-      //drawTriangles(map, triangle_points);
+      if (triangle_points.length > 2){
+      drawTriangles(map, triangle_points);
+      }
       //create a legend
       createLegend();
 
