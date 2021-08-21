@@ -1,6 +1,7 @@
 import { Delaunay } from "d3-delaunay";
 import {interpolateRdYlBu} from "d3-scale-chromatic"
 import {geoVoronoi} from "d3-geo-voronoi"
+
 var my_coords = [
     [133.7751, -25.833818],
     [132.77512, -30.833174],
@@ -130,5 +131,28 @@ export function drawPoints(map, points)
         },
     });
 } 
+
+export function createLegend()
+{
+  var layers = ['-5 - 0','0 - 5', '5 - 10', '10 - 15', '15 - 20', '25 - 30', '30 - 35', '35 - 40',];
+  var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+  var legend = document.getElementById('legend')
+
+  //create each line for legend
+  for (let i = 0; i < layers.length; i++) {
+    var layer = layers[i];
+    var color = colors[i];
+    var item = document.createElement('div');
+    var key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+  
+    var value = document.createElement('span');
+    value.innerHTML = layer;
+    item.appendChild(key);
+    item.appendChild(value);
+    legend.appendChild(item);
+  }
+}
 
 export default drawTriangles;
