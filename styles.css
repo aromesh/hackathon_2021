@@ -1,0 +1,23 @@
+.header {
+    background-color: #11324D;
+    text-align: center;
+    color: #E7E0C9;
+    font-size: 30px;
+    height: 60px;
+}
+
+.menu {
+    float: left;
+    margin: 10px;
+}
+
+.refresh {
+    float: right;
+    margin: 10px;
+
+}
+
+.logo {
+    text-align: center;
+    padding: 10px;
+}
