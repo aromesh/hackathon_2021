@@ -540,6 +540,7 @@ a img{
     display: none;
   }
 }
+
 .mdl-layout__header-row {
   background-color: #11324D;
   text-align: center;
@@ -550,4 +551,12 @@ a img{
 
 .mdl-layout__header {
   background-color: #11324D;
+}
+
+.mdl-js-button mdl-button mdl-js-ripple-effect mdl-layout-title {
+  background-color: #64ffda;
+  min-height: 75px;
+  max-height: 200px;
+  text-align: justify;
+  padding-top: 15px;
 }
