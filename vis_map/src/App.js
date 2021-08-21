@@ -3,11 +3,11 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import * as temperature_data from './temp_data_fix.json';
 
-
 import './App.css';
 import './Map.css';
 
 import drawTriangles, { drawPoints } from './delaunay_triangulation';
+import createLegend from './delaunay_triangulation';
 
 
 var my_coords = [
@@ -35,29 +35,6 @@ var MAP_CENTER = {
     latitude: -25.2744,
     zoom: 3 //zoom range 0.0 - 22.0
 };
-
-function createLegend()
-{
-  var layers = ['-5 - 0','0 - 5', '5 - 10', '10 - 15', '15 - 20', '25 - 30', '30 - 35', '35 - 40',];
-  var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
-  var legend = document.getElementById('legend')
-
-  //create each line for legend
-  for (let i = 0; i < layers.length; i++) {
-    var layer = layers[i];
-    var color = colors[i];
-    var item = document.createElement('div');
-    var key = document.createElement('span');
-    key.className = 'legend-key';
-    key.style.backgroundColor = color;
-  
-    var value = document.createElement('span');
-    value.innerHTML = layer;
-    item.appendChild(key);
-    item.appendChild(value);
-    legend.appendChild(item);
-  }
-}
 
 
 function App({props}) {
@@ -98,7 +75,16 @@ function App({props}) {
       map.current.on('load', () => {
       let req_points = props;
       console.log(req_points);
+      let filtered_array = [];
+
+      const MAX_POINTS = 300;
+      var delta = Math.floor(req_points.length / MAX_POINTS);
+      for (let i=0; i<req_points.length; i=i+delta)
+      {
+        filtered_array.push(req_points[i]);
+      }
       let triangle_points = req_points.map((elem) => [elem.lon,elem.lat, elem.temp]);
+
       //draw points for vertices
       drawPoints(map, triangle_points);
       //draw triangles
