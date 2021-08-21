@@ -9,7 +9,7 @@ import * as data2 from './city.list.json';
 
 const URL = "http://history.openweathermap.org/data/2.5/history/city?q=London,UK&appid=d877be7ce083bf6130b8b21c3dc9590b"
 const URL_START = "https://pro.openweathermap.org/data/2.5/weather?q="
-const URL_END = "&APPID=d877be7ce083bf6130b8b21c3dc9590b"
+const URL_END = ",AU&APPID=d877be7ce083bf6130b8b21c3dc9590b"
 //const filePath = './city.list.json'
 
 const API = () => {
