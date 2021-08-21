@@ -3,6 +3,7 @@ import axios from "axios";
 //import fs from 'fs'
 import * as fs from 'fs'
 import * as data2 from './city.list.json';
+import App from './App'
 
 // const fs = require('fs');
 
@@ -19,14 +20,16 @@ const API = () => {
     //const data2 = require(filePath);
     
     let data2_arr = data2.default;
-    console.log(data2_arr);
-    let filtered = data2_arr.filter((elem)=>elem.country === "AU").map((elem) => URL_START+elem.name+URL_END); 
-    console.log(filtered);
+    //console.log(data2_arr);
+    let filtered = data2_arr.filter((elem)=>elem.country === "AU").map((elem) => URL_START+elem.name+URL_END).slice(0,20); 
+    //console.log(filtered);
 
     useEffect(() => {
         filtered.map((URL) => axios(URL).then((res)=>setData(oldArray => [...oldArray,{"temp":res.data.main.temp,"lon":res.data.coord.lon,"lat":res.data.coord.lat}])))
     }, []);
-    return <pre>{JSON.stringify(data,undefined,2)}</pre>;
+    // return <pre>{JSON.stringify(data,undefined,2)}</pre>;
+    return <App props={data}/>
+
 }
 
 export default API;

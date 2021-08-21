@@ -60,7 +60,7 @@ function createLegend()
 }
 
 
-function App() {
+function App({props}) {
   //The state stores the longitude, latitude, and zoom for the map. These values will all change as your user interacts with the map.
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -80,7 +80,7 @@ function App() {
       zoom: zoom
     });
     
-  });
+  },[]);
 
   //Hook used for getting centre lat, long, zoom when map is moved
   useEffect(() => {
@@ -89,13 +89,15 @@ function App() {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
-    });
+    },[]);
 
-
+    console.log(props)
     //other stuff that will be drawn
-    map.current.on('load', () => {
-      
-      let req_points = temperature_data.default;
+    if (props !== null && props  !== undefined)
+    {
+      map.current.on('load', () => {
+      let req_points = props;
+      console.log(req_points);
       let triangle_points = req_points.map((elem) => [elem.lon,elem.lat, elem.temp]);
       //draw points for vertices
       drawPoints(map, triangle_points);
@@ -105,6 +107,7 @@ function App() {
       createLegend();
 
     });
+  }
     
   });
 

@@ -90,7 +90,9 @@ function drawTriangles(map, triangle_points) {
 
 export function drawPoints(map, points)
 {
-    map.current.addSource('route', {
+    let route = + new Date();
+    route = route.toString();
+    map.current.addSource(route, {
         'type': 'geojson',
         'data': {
             'type': 'Feature',
@@ -102,9 +104,9 @@ export function drawPoints(map, points)
         }
     })
     map.current.addLayer({
-        'id': 'route',
+        'id': route,
         'type': 'circle',
-        'source': 'route',
+        'source': route,
         'layout': {
         },
 
