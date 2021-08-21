@@ -575,3 +575,8 @@ a img{
   text-align: justify;
   padding-top: 15px;
 }
+
+.mdl-layout-title-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+}
