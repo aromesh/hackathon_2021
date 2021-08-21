@@ -79,10 +79,8 @@ function eraseTriangles(ArrayOfTriangles) {
     }
 }
 
-function toggleCheck() {
-    if(document.getElementById("list-switch-1").checked === true){
-        drawTriangles(ArrayOfTriangles)
-    } else {
-        eraseTriangles(ArrayOfTriangles)
-    }
-  }
+
+  function saveID(a) {
+      data = ["Temperature Map", "Rainfall Map", "Air Quality Map","Vegetation Map"]
+    document.getElementById('pasta').innerText = data[a];
+}
