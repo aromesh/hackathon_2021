@@ -11,6 +11,7 @@
     "colorbrewer": "^1.5.1",
     "d3-geo-voronoi": "^1.6.0",
     "delaunator": "^5.0.0",
+    "mapbox-gl": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -29,6 +30,9 @@
       "react-app/jest"
     ]
   },
+  "author": "Mapbox",
+  "license": "MIT",
+  
   "browserslist": {
     "production": [
       ">0.2%",
