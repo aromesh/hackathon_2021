@@ -1,6 +1,6 @@
 import { Delaunay } from "d3-delaunay";
-import interpolateRdYlBu from "d3-scale-chromatic"
-
+import {interpolateRdYlBu} from "d3-scale-chromatic"
+import {geoVoronoi} from "d3-geo-voronoi"
 var my_coords = [
     [133.7751, -25.833818],
     [132.77512, -30.833174],
@@ -23,8 +23,8 @@ function Triangulator(points) {
     
     var triangle_pts = [];
     var data = [];
-    data = Delaunay.from(points);
-    
+    data = Delaunay.from(points);  
+      
     var geom_indices = data.triangles;
 
     for (let i = 0; i < geom_indices.length; i += 3) {
@@ -41,21 +41,30 @@ function Triangulator(points) {
     return triangle_pts;
 }
 
-var colors = ['#FF5733','#FEFF33','#63FF33','#33FFDB','#3343FF'];
-
+function getColorValue(value, min_value, max_value)
+{
+    //scaled between 0 and 1
+    var number = (value-min_value)/(max_value-min_value);
+    return interpolateRdYlBu(number);
+}
 
 //functions to edit whats on map
-function drawTriangles(map, triangle_points) {
+function drawTriangles(map, points) {
 
-    var ArrayOfTriangles = Triangulator(triangle_points);
+    var ArrayOfTriangles = Triangulator(points);
 
     for (let i = 0; i < ArrayOfTriangles.length; i++) {
         var Triangle = ArrayOfTriangles[i];
-        var v1 = Triangle[0];
-        var v2 = Triangle[1];
-        var v3 = Triangle[2];
+        var v1 = Triangle[1];
+        var v2 = Triangle[2];
+        var v3 = Triangle[3];
         var data = 1 / 3 * (v1[2] + v2[2] + v3[2]);
         var id = Triangle[0];
+
+        var max_value = points.reduce((x,y) => x>y[2] ? x : y[2]);
+        var min_value = points.reduce((x,y) => x<y[2] ? x : y[2]);
+
+        //getColorValue(data, min_value, max_value);
         //  Add a new source
         map.current.addSource(id, {
             'type': 'geojson',
@@ -81,8 +90,8 @@ function drawTriangles(map, triangle_points) {
             'source': id, // reference the data source
             'layout': {},
             'paint': {
-                'fill-color': colors[i%4], // blue color fill
-                'fill-opacity': 0.5
+                'fill-color': getColorValue(data, min_value, max_value), // blue color fill
+                'fill-opacity': 0.5,
             }
         });
     }
@@ -113,11 +122,11 @@ export function drawPoints(map, points)
         'circle-radius': {
         'base': 1.75,
         'stops': [
-        [12, 5],
+        [12, 2],
         [22, 180]
         ]
         },
-        'circle-color': '#FF0000'
+        'circle-color': '#000000'
         },
     });
 } 

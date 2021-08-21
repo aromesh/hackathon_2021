@@ -96,11 +96,19 @@ function App() {
     map.current.on('load', () => {
       
       let req_points = temperature_data.default;
-      let triangle_points = req_points.map((elem) => [elem.lon,elem.lat, elem.temp]);
+      let filtered_array = [];
+
+      const MAX_POINTS = 300;
+      var delta = Math.floor(req_points.length / MAX_POINTS);
+      for (let i=0; i<req_points.length; i=i+delta)
+      {
+        filtered_array.push(req_points[i]);
+      }
+      let triangle_points = filtered_array.map((elem) => [elem.lon,elem.lat, elem.temp]);
       //draw points for vertices
       drawPoints(map, triangle_points);
       //draw triangles
-      //drawTriangles(map, triangle_points);
+      drawTriangles(map, triangle_points);
       //create a legend
       createLegend();
 
