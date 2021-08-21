@@ -1,8 +1,26 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
 import './App.css';
 import './Map.css';
+
+var my_coords = [
+  [133.7751, -25.833818],
+  [132.77512, -30.833174],
+  [131.7751, -26.8327],
+  [130.7751, -25.832056],
+  [129.7751, -30.831141],
+  [128.7751, -25.830497],
+  [127.7751, -30.82992],
+  [126.7751, -27.829548],
+  [125.7751, -25.829446],
+  [124.7751, -30.828802],
+  [123.7751, -29.82931],
+  [122.7751, -27.830802],
+  [121.7751, -27.831683],
+  [120.7751, -27.832158]
+  ];
 
 const MY_MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJvbTAwMDIiLCJhIjoiY2tzbDd4azZtMnV0cDJ0bzJzbmtkcXowaiJ9.hXmcl4FHTVNiv6DI8SyPUQ'
 mapboxgl.accessToken = MY_MAPBOX_TOKEN;
@@ -27,10 +45,12 @@ function App() {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       //change map style here https://docs.mapbox.com/api/maps/styles/
-      style: 'mapbox://styles/mapbox/satellite-v9',
+      //style: 'mapbox://styles/mapbox/satellite-v9',
+      style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: zoom
     });
+    
   });
 
   //Hook used for getting centre lat, long, zoom when map is moved
@@ -41,6 +61,45 @@ function App() {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
+
+    map.current.on('load', () => {
+      map.current.addSource('route', {
+      'type': 'geojson',
+      'data': {
+      'type': 'Feature',
+      'properties': {},
+      'geometry': {
+      'type': 'LineString',
+      'coordinates': my_coords
+      }
+      }
+      });
+      map.current.addLayer({
+      'id': 'route',
+      'type': 'circle',
+      'source': 'route',
+      'layout': {
+      //'line-join': 'round',
+      //'line-cap': 'round'
+      },
+      //'paint': {
+      // 'line-color': '#FF0000',
+      // 'line-width': 20
+      // }
+
+      'paint': {
+        // Make circles larger as the user zooms from z12 to z22.
+        'circle-radius': {
+        'base': 1.75,
+        'stops': [
+        [12, 2],
+        [22, 180]
+        ]
+        },
+      'circle-color': '#FF0000'
+  },
+      });
+      });
   });
 
   //return map and a sidebar with current lat, long info
